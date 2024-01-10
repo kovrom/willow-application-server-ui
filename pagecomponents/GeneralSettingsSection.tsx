@@ -173,6 +173,7 @@ export default function GeneralSettingsSection({
     formErrorContext.WisUrlError = { Error: false, HelperText: '' };
     formErrorContext.MqttHostError = { Error: false, HelperText: '' };
     formErrorContext.MqttPortError = { Error: false, HelperText: '' };
+    formErrorContext.WebhookUrlError = { Error: false, HelperText: '' };
   };
 
   // Handler to reset field values to defaults
