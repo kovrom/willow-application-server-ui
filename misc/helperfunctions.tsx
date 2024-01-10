@@ -119,6 +119,7 @@ export async function handleSubmit(
     lcd_brightness: parseIntOrUndef(generalSettingsForm.lcd_brightness),
     display_timeout: parseIntOrUndef(generalSettingsForm.display_timeout),
     wake_confirmation: !!generalSettingsForm.wake_confirmation,
+    webhook_command: !!generalSettingsForm.webhook_command,
     timezone: tzDictionary[generalSettingsForm.timezone],
     timezone_name: generalSettingsForm.timezone,
   };

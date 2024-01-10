@@ -98,6 +98,8 @@ export interface GeneralSettings {
   lcd_brightness: number | undefined;
   display_timeout: number | undefined;
   wake_confirmation: boolean; //Enables/Disables Wake Confirmation Chime
+  webhook_url: string;
+  webhook_command: boolean; //Enables/Disables send webhook command on Wake
   timezone: string;
   timezone_name: string;
   ntp_config: keyof typeof NTP_CONFIG;
@@ -121,6 +123,7 @@ export interface FormErrorState {
 export interface FormErrorStates {
   WisUrlError: FormErrorState;
   WisTtsUrlError: FormErrorState;
+  WebhookUrlError: FormErrorState;
   HassHostError: FormErrorState;
   HassPortError: FormErrorState;
   OpenhabUrlError: FormErrorState;
