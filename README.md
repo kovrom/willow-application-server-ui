@@ -1,4 +1,7 @@
+
 # Willow Application Server Web UI
+
+## This fork contains tweaks and modifications that may or may not be compatible with official builds of the main project. The changes implemented here are quick and dirty - they work for my purposes, but are not held to the same standards of quality or stability as the main project. Use at your own risk! Consider this an unofficial playground for experiments and rapid prototyping rather than a robust or supported software package.
 
 This repo contains the source code for the web user interface of the [Willow Application Server](https://github.com/toverainc/willow-application-server) (WAS). It is intended for developers who want to customize or contribute to the WAS web user interface.
 
