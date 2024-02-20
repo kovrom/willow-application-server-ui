@@ -408,7 +408,7 @@ export default function GeneralSettingsSection({
         <Stack spacing={2} direction="row" sx={{ mb: 1 }} justifyContent="space-between">
           <FormControlLabel
             control={
-              <Checkbox
+              <Switch
                 name="webhook_command"
                 checked={fieldState.webhook_command}
                 onChange={(event) => {
