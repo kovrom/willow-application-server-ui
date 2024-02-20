@@ -67,12 +67,14 @@ export const OnboardingContext = React.createContext<OnboardingState>({
 export const FormErrorContext = React.createContext<FormErrorStates>({
   WisUrlError: { Error: false, HelperText: '' },
   WisTtsUrlError: { Error: false, HelperText: '' },
+  WebhookUrlError: { Error: false, HelperText: '' },    
   HassHostError: { Error: false, HelperText: '' },
   HassPortError: { Error: false, HelperText: '' },
   OpenhabUrlError: { Error: false, HelperText: '' },
   RestUrlError: { Error: false, HelperText: '' },
   MqttHostError: { Error: false, HelperText: '' },
   MqttPortError: { Error: false, HelperText: '' },
+  
 });
 
 export class HttpError extends Error {

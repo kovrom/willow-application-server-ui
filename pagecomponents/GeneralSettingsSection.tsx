@@ -30,7 +30,7 @@ import {
   TZDictionary,
   WAKE_WORDS,
 } from '../misc/model';
-import { ValidateWisTtsUrl, ValidateWisUrl } from '../misc/validations';
+import { ValidateWisTtsUrl, ValidateWisUrl, ValidateHassHost, ValidateUrl } from '../misc/validations';
 import { FormErrorContext, OnboardingContext } from '../pages/_app';
 import HassCommandEndpoint from './HassCommandEndpoint';
 import MQTTCommandEndpoint from './MQTTCommandEndpoint';
@@ -173,6 +173,7 @@ export default function GeneralSettingsSection({
     formErrorContext.WisUrlError = { Error: false, HelperText: '' };
     formErrorContext.MqttHostError = { Error: false, HelperText: '' };
     formErrorContext.MqttPortError = { Error: false, HelperText: '' };
+    formErrorContext.WebhookUrlError = { Error: false, HelperText: '' };
   };
 
   // Handler to reset field values to defaults
@@ -217,6 +218,22 @@ export default function GeneralSettingsSection({
     }
 
     setFieldStateHelper('wis_tts_url', value);
+    setChangesMade(true);
+  };
+
+  const handleWebhookUrlChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const value = event.target.value;
+    const validationResult = ValidateUrl(value);
+
+    if (validationResult) {
+      formErrorContext.WebhookUrlError = { Error: true, HelperText: validationResult };
+    } else {
+      formErrorContext.WebhookUrlError = { Error: false, HelperText: '' };
+    }
+
+    setFieldStateHelper('webhook_url', value);
     setChangesMade(true);
   };
 
@@ -367,6 +384,42 @@ export default function GeneralSettingsSection({
             label="Wake Confirmation Tone"
           />
           <HelpTooltip tooltip="Enabling this option will have your Willow devices chime when activated by the wake word."></HelpTooltip>
+        </Stack>
+      </FormControl>
+      <Stack spacing={2} direction="row" sx={{ mb: 1, mt: 1 }} alignItems="center">
+        <TextField
+          name="webhook_url"
+          value={fieldState.webhook_url}
+          onChange={handleWebhookUrlChange}
+          error={formErrorContext.WebhookUrlError.Error}
+          helperText={formErrorContext.WebhookUrlError.HelperText}          
+          label="Webhook URL"
+          margin="dense"
+          variant="outlined"
+          size="small"
+          fullWidth
+        />
+        <HelpTooltip
+          tooltip="The URL for Webhook, 
+          where to send PUT request on wake word. Format: http://your_hass_ip:8123/api/webhook/"
+        />
+      </Stack>
+      <FormControl fullWidth>
+        <Stack spacing={2} direction="row" sx={{ mb: 1 }} justifyContent="space-between">
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="webhook_command"
+                checked={fieldState.webhook_command}
+                onChange={(event) => {
+                  setFieldStateHelper('webhook_command', event.target.checked);
+                  setChangesMade(true);
+                }}
+              />
+            }
+            label="Send Webhook Command on Wake"
+          />
+          <HelpTooltip tooltip="Enable this option to start sending PUT request to Webhook URL on wake word"></HelpTooltip>
         </Stack>
       </FormControl>
       <InputLabel>Speaker Volume</InputLabel>
